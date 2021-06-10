@@ -36,19 +36,13 @@ inquirer
       },
   ])
   .then(answers => {
-    //create manager
     let manager = new Manager(answers.managerName, answers.managerID, answers.managerEmail, answers.managerOfficeNumber);
-    //add manager to global team members object
     teamMembers.push(manager);
-    //evaluate additional team members options
     addedTeamMembers(answers.additionalTeamMember);
   })
   .catch(error => {
-      //boiler plate error handling from inquire
     if(error.isTtyError) {
-      // Prompt couldn't be rendered in the current environment
     } else {
-      // Something else went wrong
     }
   });
 
@@ -57,7 +51,6 @@ function addEngineer()
 {
 inquirer
 .prompt([
-    //declaring my list of questions here
     {
         name:"engineerName",
         type:"input",
@@ -86,29 +79,21 @@ inquirer
     },
 ])
 .then(answers => {
-    //create new intern
     let engineer = new Engineer(answers.engineerName, answers.engineerID, answers.engineerEmail, answers.engineerGithub);
-    //add to global array
     teamMembers.push(engineer);
-    //evaluate additional team member
     addedTeamMembers(answers.additionalTeamMember);
 })
 .catch(error => {
-    //boiler plate error handling from inquire
     if(error.isTtyError) {
-    // Prompt couldn't be rendered in the current environment
     } else {
-    // Something else went wrong
     }
 });
 }
 
-//call this as many times as interns need to be added
 function addIntern()
 {
 inquirer
 .prompt([
-    //declaring my list of questions here
     {
         name:"internName",
         type:"input",
@@ -137,20 +122,14 @@ inquirer
     },
 ])
 .then(answers => {
-    //create new intern
     let intern = new Intern(answers.internName, answers.internID, answers.internEmail, answers.internSchool);
-    //add to global array
     teamMembers.push(intern);
-    //evaluate additional team member
     addedTeamMembers(answers.additionalTeamMember);
 
 })
 .catch(error => {
-    //boiler plate error handling from inquire
     if(error.isTtyError) {
-    // Prompt couldn't be rendered in the current environment
     } else {
-    // Something else went wrong
     }
 });
 }
@@ -159,15 +138,12 @@ function addedTeamMembers(result)
 {
     if(result === "Engineer")
     {
-        //call add engineer prompts
         addEngineer();
     }else if(result === "Intern")
     {
-        //call add intern prompts
         addIntern();
     }else
     {
-        //finish with asking prompts and generate html
         generateHTML();
     }
 }
@@ -213,20 +189,14 @@ function generateFinalHtml()
     </html>`;
 }
 
-//loop through team members array and generate html
 function generateHTML()
 {
-    //first create new file (overwrite existing if file exists)
     fs.writeFileSync(filePathHtmlGenerate,"");
-    //setup string to hold generated html
     let htmlData = generateInitialHTML();
-    //loop through team members
     for(var a in teamMembers)
     {
         htmlData += generateTeamMemberHtml(teamMembers[a]);
     }
-    //add final html to data
     htmlData += generateFinalHtml();
-    //write data to file
     fs.writeFileSync(filePathHtmlGenerate,htmlData);
 }
