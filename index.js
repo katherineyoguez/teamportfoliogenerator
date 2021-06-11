@@ -160,7 +160,7 @@ function generateInitialHTML()
         <link rel="stylesheet" href="./teamProfile.css">
     </head>
     <body>
-        <div class="teamNavBar">
+        <div class="NavBar">
             <h1 class="navBarTitle">My Team</h2>
         </div>
         <div class="cardBody">`
@@ -168,7 +168,8 @@ function generateInitialHTML()
 
 function generateTeamMemberHtml(teamMember)
 {
-    return `        <div class="teamMemberCard">
+    return `
+    <div class="teamMemberCard">
     <div class="teamMemberTitle">
         <h3>${teamMember.getName()} - ${teamMember.getRole()}</h3>
     </div>
@@ -184,7 +185,7 @@ function generateTeamMemberHtml(teamMember)
 
 function generateFinalHtml()
 {
-    return `    </div>
+    return `
     </body>
     </html>`;
 }
